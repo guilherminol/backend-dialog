@@ -51,6 +51,19 @@ class User(DatabaseConector):
         response = cls.cur.fetchall()
         return response
 
+    @classmethod
+    def get_one(cls,userId):
+        cls.get_conn_cur()
+        query = "SELECT * FROM users WHERE id = %s"
+        query_values = [str(userId)]
+        print('*'*20)
+        print(userId)
+        print('*'*20)
+
+        cls.cur.execute(query,query_values)
+        response = cls.cur.fetchone()
+        cls.commit_and_close()
+        return response
         
 
 
